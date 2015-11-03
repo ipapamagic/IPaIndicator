@@ -20,7 +20,7 @@ class IPaActivityIndicator: UIView {
         super.init(frame: frame)
         initialSetting()
     }
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialSetting()
     }
@@ -31,20 +31,20 @@ class IPaActivityIndicator: UIView {
         indicatorBackView.backgroundColor = UIColor(white: 0, alpha: 0.7)
         indicatorBackView.layer.cornerRadius = 10
         indicatorBackView.clipsToBounds = true
-        indicator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
 
         indicatorBackView .addSubview(indicator)
         
-        var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[indicator]-30-|", options: .allZeros, metrics: nil, views: ["indicator":indicator])
+        var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[indicator]-30-|", options: [], metrics: nil, views: ["indicator":indicator])
         indicatorBackView.addConstraints(constraints)
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-30-[indicator]-30-|", options: .allZeros, metrics: nil, views: ["indicator":indicator])
+        constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-30-[indicator]-30-|", options: [], metrics: nil, views: ["indicator":indicator])
         indicatorBackView.addConstraints(constraints)
         
         
         
         indicator.startAnimating()
         
-        indicatorBackView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        indicatorBackView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(indicatorBackView)
         var constraint = NSLayoutConstraint(item: indicatorBackView, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0)
         self.addConstraint(constraint)
@@ -58,10 +58,10 @@ class IPaActivityIndicator: UIView {
         super.willMoveToSuperview(newSuperview)
         if let superview = superview {
             // remove old super view
-            var list = IPaActivityIndicator.workingIndicators[superview]
+            let list = IPaActivityIndicator.workingIndicators[superview]
             if list != nil {
                 var list = list!
-                if let index = find(list, self) {
+                if let index = list.indexOf(self) {
                     list.removeAtIndex(index)
                     IPaActivityIndicator.workingIndicators[superview] = list
                     
