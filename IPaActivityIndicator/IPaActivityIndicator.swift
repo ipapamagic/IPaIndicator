@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class IPaActivityIndicator: UIView {
-    static var workingIndicators = [UIView:[IPaActivityIndicator]]()
+    static var workingIndicators = [UIView:IPaActivityIndicator]()
     lazy var indicator = UIActivityIndicatorView(activityIndicatorStyle:.WhiteLarge)
     lazy var indicatorBackView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     convenience init(view:UIView) {
@@ -58,15 +58,12 @@ class IPaActivityIndicator: UIView {
         super.willMoveToSuperview(newSuperview)
         if let superview = superview {
             // remove old super view
-            let list = IPaActivityIndicator.workingIndicators[superview]
-            if list != nil {
-                var list = list!
-                if let index = list.indexOf(self) {
-                    list.removeAtIndex(index)
-                    IPaActivityIndicator.workingIndicators[superview] = list
-                    
-                }
+            let currentIndicator = IPaActivityIndicator.workingIndicators[superview]
+            if currentIndicator != nil && currentIndicator != self{
+                //should not be here
+                currentIndicator!.removeFromSuperview()
             }
+
         }
        
     }
@@ -74,34 +71,24 @@ class IPaActivityIndicator: UIView {
         super.didMoveToSuperview()
         // add to new super view
         if let superview = self.superview {
-            var list = IPaActivityIndicator.workingIndicators[superview]
-            if list == nil {
-                list = [IPaActivityIndicator]()
-            }
-            var mlist = list!
-            mlist.append(self)
-            IPaActivityIndicator.workingIndicators[superview] = mlist
+            IPaActivityIndicator.workingIndicators[superview] = self
         }
     }
 // MARK:static public function
     static func show(inView:UIView) -> IPaActivityIndicator {
         let indicator = IPaActivityIndicator(view:inView)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
         inView.addSubview(indicator)
+        let viewsDict = ["view": indicator]
+        inView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|",options:NSLayoutFormatOptions(rawValue: 0),metrics:nil,views:viewsDict))
+        inView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|",options:NSLayoutFormatOptions(rawValue: 0),metrics:nil,views:viewsDict))
+        
         return indicator
     }
     static func hide(fromView:UIView) {
-        if let list = IPaActivityIndicator.workingIndicators[fromView] {
-            if let indicator = list.last {
-                indicator.removeFromSuperview()
-            }
-        }
-    }
-    static func hideAll(fromView:UIView) {
-        if let list = IPaActivityIndicator.workingIndicators[fromView] {
-            for indicator in list {
-                indicator.removeFromSuperview()
-            }
-           
+        if let indicator = IPaActivityIndicator.workingIndicators[fromView] {
+            indicator.removeFromSuperview()
+            IPaActivityIndicator.workingIndicators.removeValueForKey(fromView)
         }
     }
 }
