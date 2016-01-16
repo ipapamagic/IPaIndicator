@@ -77,18 +77,27 @@ class IPaActivityIndicator: UIView {
 // MARK:static public function
     static func show(inView:UIView) -> IPaActivityIndicator {
         let indicator = IPaActivityIndicator(view:inView)
-        indicator.translatesAutoresizingMaskIntoConstraints = false
-        inView.addSubview(indicator)
-        let viewsDict = ["view": indicator]
-        inView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|",options:NSLayoutFormatOptions(rawValue: 0),metrics:nil,views:viewsDict))
-        inView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|",options:NSLayoutFormatOptions(rawValue: 0),metrics:nil,views:viewsDict))
-        
+        dispatch_async(dispatch_get_main_queue(), {
+            
+            indicator.translatesAutoresizingMaskIntoConstraints = false
+            inView.addSubview(indicator)
+
+            
+            let viewsDict = ["view": indicator]
+            inView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|",options:[.AlignAllTop,.AlignAllBottom],metrics:nil,views:viewsDict))
+            inView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|",options:[.AlignAllLeading,.AlignAllTrailing],metrics:nil,views:viewsDict))
+            
+            
+        })
         return indicator
     }
     static func hide(fromView:UIView) {
-        if let indicator = IPaActivityIndicator.workingIndicators[fromView] {
-            indicator.removeFromSuperview()
-            IPaActivityIndicator.workingIndicators.removeValueForKey(fromView)
-        }
+        dispatch_async(dispatch_get_main_queue(), {
+            if let indicator = IPaActivityIndicator.workingIndicators[fromView] {
+                indicator.removeFromSuperview()
+                IPaActivityIndicator.workingIndicators.removeValueForKey(fromView)
+            }
+        })
+
     }
 }
