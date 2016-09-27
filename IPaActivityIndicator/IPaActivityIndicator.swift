@@ -11,7 +11,7 @@ import UIKit
 
 class IPaActivityIndicator: UIView {
     static var workingIndicators = [UIView:IPaActivityIndicator]()
-    lazy var indicator = UIActivityIndicatorView(activityIndicatorStyle:.WhiteLarge)
+    lazy var indicator = UIActivityIndicatorView(activityIndicatorStyle:.whiteLarge)
     lazy var indicatorBackView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     convenience init(view:UIView) {
         self.init(frame: view.bounds)
@@ -26,8 +26,8 @@ class IPaActivityIndicator: UIView {
     }
 
     func initialSetting() {
-        userInteractionEnabled = true
-        backgroundColor = UIColor.clearColor()
+        isUserInteractionEnabled = true
+        backgroundColor = UIColor.clear
         indicatorBackView.backgroundColor = UIColor(white: 0, alpha: 0.7)
         indicatorBackView.layer.cornerRadius = 10
         indicatorBackView.clipsToBounds = true
@@ -35,9 +35,9 @@ class IPaActivityIndicator: UIView {
 
         indicatorBackView .addSubview(indicator)
         
-        var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-30-[indicator]-30-|", options: [], metrics: nil, views: ["indicator":indicator])
+        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[indicator]-30-|", options: [], metrics: nil, views: ["indicator":indicator])
         indicatorBackView.addConstraints(constraints)
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|-30-[indicator]-30-|", options: [], metrics: nil, views: ["indicator":indicator])
+        constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-30-[indicator]-30-|", options: [], metrics: nil, views: ["indicator":indicator])
         indicatorBackView.addConstraints(constraints)
         
         
@@ -46,16 +46,16 @@ class IPaActivityIndicator: UIView {
         
         indicatorBackView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(indicatorBackView)
-        var constraint = NSLayoutConstraint(item: indicatorBackView, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0)
+        var constraint = NSLayoutConstraint(item: indicatorBackView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
         self.addConstraint(constraint)
-        constraint = NSLayoutConstraint(item: indicatorBackView, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0)
+        constraint = NSLayoutConstraint(item: indicatorBackView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
         
         self.addConstraint(constraint)
 
         
     }
-    override func willMoveToSuperview(newSuperview: UIView?) {
-        super.willMoveToSuperview(newSuperview)
+    override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
         if let superview = superview {
             // remove old super view
             let currentIndicator = IPaActivityIndicator.workingIndicators[superview]
@@ -75,27 +75,27 @@ class IPaActivityIndicator: UIView {
         }
     }
 // MARK:static public function
-    static func show(inView:UIView) -> IPaActivityIndicator {
+    static func show(_ inView:UIView) {
         let indicator = IPaActivityIndicator(view:inView)
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             
             indicator.translatesAutoresizingMaskIntoConstraints = false
             inView.addSubview(indicator)
 
             
-            let viewsDict = ["view": indicator]
-            inView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|",options:[.AlignAllTop,.AlignAllBottom],metrics:nil,views:viewsDict))
-            inView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|",options:[.AlignAllLeading,.AlignAllTrailing],metrics:nil,views:viewsDict))
+            let viewsDict:[String:UIView] = ["view": indicator]
+            inView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",options:[.alignAllTop,.alignAllBottom],metrics:nil,views:viewsDict))
+            inView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",options:[.alignAllLeading,.alignAllTrailing],metrics:nil,views:viewsDict))
             
             
         })
-        return indicator
+        
     }
-    static func hide(fromView:UIView) {
-        dispatch_async(dispatch_get_main_queue(), {
+    static func hide(_ fromView:UIView) {
+        DispatchQueue.main.async(execute: {
             if let indicator = IPaActivityIndicator.workingIndicators[fromView] {
                 indicator.removeFromSuperview()
-                IPaActivityIndicator.workingIndicators.removeValueForKey(fromView)
+                IPaActivityIndicator.workingIndicators.removeValue(forKey: fromView)
             }
         })
 
