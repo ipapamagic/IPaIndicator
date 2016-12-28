@@ -1,0 +1,23 @@
+PODS:
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
+    - FBSnapshotTestCase/Core
+  - IPaActivityIndicator (1.0)
+
+DEPENDENCIES:
+  - FBSnapshotTestCase
+  - IPaActivityIndicator (from `../`)
+
+EXTERNAL SOURCES:
+  IPaActivityIndicator:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  IPaActivityIndicator: 72b580a7e53fea191d7e289e22e85c128f1ba686
+
+PODFILE CHECKSUM: c061304af5a82ffe61383698f7ec45b89f2ca205
+
+COCOAPODS: 1.1.1
