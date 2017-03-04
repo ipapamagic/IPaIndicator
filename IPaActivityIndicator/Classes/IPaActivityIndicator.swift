@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 @objc public class IPaActivityIndicator: UIView {
-    static var workingIndicators = [UIView:IPaActivityIndicator]()
+    
     lazy var indicator = UIActivityIndicatorView(activityIndicatorStyle:.whiteLarge)
     lazy var indicatorBlackView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     convenience init(view:UIView) {
@@ -54,26 +54,7 @@ import UIKit
 
         
     }
-    override public func willMove(toSuperview newSuperview: UIView?) {
-        super.willMove(toSuperview: newSuperview)
-        if let superview = superview {
-            // remove old super view
-            let currentIndicator = IPaActivityIndicator.workingIndicators[superview]
-            if currentIndicator != nil && currentIndicator != self{
-                //should not be here
-                currentIndicator!.removeFromSuperview()
-            }
-
-        }
-       
-    }
-    override public func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        // add to new super view
-        if let superview = self.superview {
-            IPaActivityIndicator.workingIndicators[superview] = self
-        }
-    }
+    
     static func getActualInView(_ view:UIView) -> UIView? {
         var actualInView = view
         while (actualInView is UITableView) {
@@ -111,10 +92,14 @@ import UIKit
             return
         }
         DispatchQueue.main.async(execute: {
-            if let indicator = IPaActivityIndicator.workingIndicators[actualFromView] {
-                indicator.removeFromSuperview()
-                IPaActivityIndicator.workingIndicators.removeValue(forKey: actualFromView)
+            let views = actualFromView.subviews.filter({
+                view in
+                return view is IPaActivityIndicator
+            })
+            for view in views {
+                view.removeFromSuperview()
             }
+            
         })
 
     }
