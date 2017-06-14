@@ -17,6 +17,7 @@ import UIKit
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.numberOfLines = 0
         return label
     }()
     convenience init(view:UIView) {
@@ -55,12 +56,16 @@ import UIKit
         textLabel.setContentCompressionResistancePriority(751, for: .horizontal)
         indicator.startAnimating()
         
+        
         indicatorBlackView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(indicatorBlackView)
         constraint = NSLayoutConstraint(item: indicatorBlackView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
         self.addConstraint(constraint)
         constraint = NSLayoutConstraint(item: indicatorBlackView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
-        
+        self.addConstraint(constraint)
+        constraint = NSLayoutConstraint(item: indicatorBlackView, attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: self, attribute: .leading, multiplier: 1, constant: 16)
+        self.addConstraint(constraint)
+        constraint = NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .greaterThanOrEqual, toItem: indicatorBlackView, attribute: .trailing, multiplier: 1, constant: 16)
         self.addConstraint(constraint)
 
         
