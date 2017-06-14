@@ -84,8 +84,10 @@ import UIKit
         return actualInView
     }
 // MARK:static public function
-
-    static public func show(_ inView:UIView,text:String? = nil) {
+    static public func show(_ inView:UIView) {
+        self.show(inView, text: nil)
+    }
+    static public func show(_ inView:UIView,text:String?) {
         guard let actualInView = getActualInView(inView) else {
             return
         }
