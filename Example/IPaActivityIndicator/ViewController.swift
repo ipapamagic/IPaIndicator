@@ -17,10 +17,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        IPaActivityIndicator.show(self.view)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5 , execute: {
-            IPaActivityIndicator.hide(self.view)
-        })
+       
         
     }
     override func didReceiveMemoryWarning() {
@@ -28,5 +25,17 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func showLoadingText(_ sender: Any) {
+        IPaActivityIndicator.show(self.view,text:"loading...")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5 , execute: {
+            IPaActivityIndicator.hide(self.view)
+        })
+    }
+    @IBAction func onShow(_ sender: Any) {
+        IPaActivityIndicator.show(self.view)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5 , execute: {
+            IPaActivityIndicator.hide(self.view)
+        })
+    }
 }
 

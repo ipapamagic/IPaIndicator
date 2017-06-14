@@ -13,6 +13,12 @@ import UIKit
     
     lazy var indicator = UIActivityIndicatorView(activityIndicatorStyle:.whiteLarge)
     lazy var indicatorBlackView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    lazy var textLabel:UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        return label
+    }()
     convenience init(view:UIView) {
         self.init(frame: view.bounds)
     }
@@ -32,21 +38,26 @@ import UIKit
         indicatorBlackView.layer.cornerRadius = 10
         indicatorBlackView.clipsToBounds = true
         indicator.translatesAutoresizingMaskIntoConstraints = false
-
-        indicatorBlackView .addSubview(indicator)
-        
-        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[indicator]-30-|", options: [], metrics: nil, views: ["indicator":indicator])
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        indicatorBlackView.addSubview(indicator)
+        indicatorBlackView.addSubview(textLabel)
+        let viewDict = ["indicator":indicator,"textLabel":textLabel] as [String : Any]
+        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[indicator]-15-[textLabel]-15-|", options: [], metrics: nil, views:viewDict)
         indicatorBlackView.addConstraints(constraints)
-        constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-30-[indicator]-30-|", options: [], metrics: nil, views: ["indicator":indicator])
+        constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-30@999-[indicator]-30@999-|", options: [], metrics: nil, views: viewDict)
         indicatorBlackView.addConstraints(constraints)
-        
-        
-        
+        var constraint = NSLayoutConstraint(item: indicatorBlackView, attribute: .centerX, relatedBy: .equal, toItem: textLabel, attribute: .centerX, multiplier: 1, constant: 0)
+        indicatorBlackView.addConstraint(constraint)
+        constraint = NSLayoutConstraint(item: textLabel, attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: indicatorBlackView, attribute: .leading, multiplier: 1, constant: 8)
+        indicatorBlackView.addConstraint(constraint)
+        constraint = NSLayoutConstraint(item: indicatorBlackView, attribute: .trailing, relatedBy: .greaterThanOrEqual, toItem: textLabel, attribute: .trailing, multiplier: 1, constant: 8)
+        indicatorBlackView.addConstraint(constraint)
+        textLabel.setContentCompressionResistancePriority(751, for: .horizontal)
         indicator.startAnimating()
         
         indicatorBlackView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(indicatorBlackView)
-        var constraint = NSLayoutConstraint(item: indicatorBlackView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
+        constraint = NSLayoutConstraint(item: indicatorBlackView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
         self.addConstraint(constraint)
         constraint = NSLayoutConstraint(item: indicatorBlackView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)
         
@@ -68,11 +79,15 @@ import UIKit
         return actualInView
     }
 // MARK:static public function
-    static public func show(_ inView:UIView) {
+
+    static public func show(_ inView:UIView,text:String? = nil) {
         guard let actualInView = getActualInView(inView) else {
             return
         }
         let indicator = IPaActivityIndicator(view:actualInView)
+        if let text = text {
+            indicator.textLabel.text = text
+        }
         DispatchQueue.main.async(execute: {
             
             indicator.translatesAutoresizingMaskIntoConstraints = false
