@@ -1,6 +1,6 @@
 import UIKit
 import XCTest
-import IPaActivityIndicator
+import IPaIndicator
 
 class Tests: XCTestCase {
     

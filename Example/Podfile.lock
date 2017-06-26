@@ -1,23 +1,19 @@
 PODS:
-  - FBSnapshotTestCase (2.1.4):
-    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
-  - FBSnapshotTestCase/Core (2.1.4)
-  - FBSnapshotTestCase/SwiftSupport (2.1.4):
-    - FBSnapshotTestCase/Core
-  - IPaActivityIndicator (1.0)
+  - DRCircularProgress (1.0.3)
+  - IPaIndicator (2.0)
 
 DEPENDENCIES:
-  - FBSnapshotTestCase
-  - IPaActivityIndicator (from `../`)
+  - DRCircularProgress
+  - IPaIndicator (from `../`)
 
 EXTERNAL SOURCES:
-  IPaActivityIndicator:
+  IPaIndicator:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  IPaActivityIndicator: 72b580a7e53fea191d7e289e22e85c128f1ba686
+  DRCircularProgress: d4e19f1d1bfb47e7c6337585748d26624ef7c7d1
+  IPaIndicator: bce42269ace7a517d4937bbb48090a3a4bfbdd92
 
-PODFILE CHECKSUM: c061304af5a82ffe61383698f7ec45b89f2ca205
+PODFILE CHECKSUM: 48d1195def3d893613433dd6653806cd224c1047
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1

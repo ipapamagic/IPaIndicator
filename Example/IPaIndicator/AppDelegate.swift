@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  IPaActivityIndicator
+//  IPaIndicator
 //
-//  Created by IPa Chen on 12/28/2016.
-//  Copyright (c) 2016 IPa Chen. All rights reserved.
+//  Created by ipapamagic@gmail.com on 06/25/2017.
+//  Copyright (c) 2017 ipapamagic@gmail.com. All rights reserved.
 //
 
 import UIKit

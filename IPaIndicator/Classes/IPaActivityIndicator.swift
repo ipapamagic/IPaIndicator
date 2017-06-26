@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-@objc public class IPaActivityIndicator: UIView {
+public class IPaActivityIndicator: IPaIndicator {
     
     lazy var indicator = UIActivityIndicatorView(activityIndicatorStyle:.whiteLarge)
-    lazy var indicatorBlackView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    
     lazy var textLabel:UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -20,24 +20,9 @@ import UIKit
         label.numberOfLines = 0
         return label
     }()
-    convenience init(view:UIView) {
-        self.init(frame: view.bounds)
-    }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initialSetting()
-    }
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initialSetting()
-    }
-
-    func initialSetting() {
-        isUserInteractionEnabled = true
-        backgroundColor = UIColor.clear
-        indicatorBlackView.backgroundColor = UIColor(white: 0, alpha: 0.7)
-        indicatorBlackView.layer.cornerRadius = 10
-        indicatorBlackView.clipsToBounds = true
+   
+    override func initialSetting() {
+        super.initialSetting()
         indicator.translatesAutoresizingMaskIntoConstraints = false
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         indicatorBlackView.addSubview(indicator)
@@ -71,58 +56,14 @@ import UIKit
         
     }
     
-    static func getActualInView(_ view:UIView) -> UIView? {
-        var actualInView = view
-        while (actualInView is UITableView) {
-            if let inSuperView = actualInView.superview {
-                actualInView = inSuperView
-            }
-            else {
-                return nil
-            }
-        }
-        return actualInView
-    }
+    
 // MARK:static public function
-    static public func show(_ inView:UIView) {
-        self.show(inView, text: nil)
-    }
+    
     static public func show(_ inView:UIView,text:String?) {
-        guard let actualInView = getActualInView(inView) else {
-            return
-        }
-        let indicator = IPaActivityIndicator(view:actualInView)
+        let indicator = self.show(inView)
         if let text = text {
             indicator.textLabel.text = text
         }
-        DispatchQueue.main.async(execute: {
-            
-            indicator.translatesAutoresizingMaskIntoConstraints = false
-            actualInView.addSubview(indicator)
-
-            
-            let viewsDict:[String:UIView] = ["view": indicator]
-            actualInView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",options:[.alignAllTop,.alignAllBottom],metrics:nil,views:viewsDict))
-            actualInView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",options:[.alignAllLeading,.alignAllTrailing],metrics:nil,views:viewsDict))
-            
-            
-        })
-        
     }
-    static public func hide(_ fromView:UIView) {
-        guard let actualFromView = getActualInView(fromView) else {
-            return
-        }
-        DispatchQueue.main.async(execute: {
-            let views = actualFromView.subviews.filter({
-                view in
-                return view is IPaActivityIndicator
-            })
-            for view in views {
-                view.removeFromSuperview()
-            }
-            
-        })
-
-    }
+    
 }

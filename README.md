@@ -1,2 +1,2 @@
-# IPaActivityIndicator
-IPaActivityIndicator can help you easily show up a loading indicator on screen
+# IPaIndicator
+can easily show indicator in selected view

@@ -1,11 +1,10 @@
 use_frameworks!
 
-target 'IPaActivityIndicator_Example' do
-  pod 'IPaActivityIndicator', :path => '../'
-
-  target 'IPaActivityIndicator_Tests' do
+target 'IPaIndicator_Example' do
+  pod 'IPaIndicator', :path => '../'
+  target 'IPaIndicator_Tests' do
     inherit! :search_paths
 
-    pod 'FBSnapshotTestCase'
+#    pod 'FBSnapshotTestCase'
   end
 end

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-               BuildableName = "IPaActivityIndicator_Example.app"
-               BlueprintName = "IPaActivityIndicator_Example"
-               ReferencedContainer = "container:IPaActivityIndicator.xcodeproj">
+               BuildableName = "IPaIndicator_Example.app"
+               BlueprintName = "IPaIndicator_Example"
+               ReferencedContainer = "container:IPaIndicator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "IPaActivityIndicator_Tests.xctest"
-               BlueprintName = "IPaActivityIndicator_Tests"
-               ReferencedContainer = "container:IPaActivityIndicator.xcodeproj">
+               BuildableName = "IPaIndicator_Tests.xctest"
+               BlueprintName = "IPaIndicator_Tests"
+               ReferencedContainer = "container:IPaIndicator.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "IPaActivityIndicator_Tests.xctest"
-               BlueprintName = "IPaActivityIndicator_Tests"
-               ReferencedContainer = "container:IPaActivityIndicator.xcodeproj">
+               BuildableName = "IPaIndicator_Tests.xctest"
+               BlueprintName = "IPaIndicator_Tests"
+               ReferencedContainer = "container:IPaIndicator.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "IPaActivityIndicator_Example.app"
-            BlueprintName = "IPaActivityIndicator_Example"
-            ReferencedContainer = "container:IPaActivityIndicator.xcodeproj">
+            BuildableName = "IPaIndicator_Example.app"
+            BlueprintName = "IPaIndicator_Example"
+            ReferencedContainer = "container:IPaIndicator.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "IPaActivityIndicator_Example.app"
-            BlueprintName = "IPaActivityIndicator_Example"
-            ReferencedContainer = "container:IPaActivityIndicator.xcodeproj">
+            BuildableName = "IPaIndicator_Example.app"
+            BlueprintName = "IPaIndicator_Example"
+            ReferencedContainer = "container:IPaIndicator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -99,9 +99,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "IPaActivityIndicator_Example.app"
-            BlueprintName = "IPaActivityIndicator_Example"
-            ReferencedContainer = "container:IPaActivityIndicator.xcodeproj">
+            BuildableName = "IPaIndicator_Example.app"
+            BlueprintName = "IPaIndicator_Example"
+            ReferencedContainer = "container:IPaIndicator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
