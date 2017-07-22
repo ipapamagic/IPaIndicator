@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IPaIndicator'
-  s.version          = '2.0'
+  s.version          = '2.0.1'
   s.summary          = 'A short description of IPaIndicator.'
 
 # This description is used to generate tags and improve search results.
