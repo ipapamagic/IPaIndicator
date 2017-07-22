@@ -21,21 +21,21 @@ open class IPaRoundProgressView: UIView {
             return self.layer as! IPaRoudProgressLayer
         }
     }
-    @IBInspectable public var progressBackColor:UIColor = UIColor.lightGray {
+    @IBInspectable open var progressBackColor:UIColor = UIColor.lightGray {
         didSet {
             
             progressLayer.progressBackColor = self.progressBackColor.cgColor
             self.layer.setNeedsDisplay()
         }
     }
-    @IBInspectable public var progressColor:UIColor = UIColor.white {
+    @IBInspectable open var progressColor:UIColor = UIColor.white {
         didSet {
             progressLayer.progressColor = self.progressColor.cgColor
             self.layer.setNeedsDisplay()
         }
     }
     
-    @IBInspectable public var progress:CGFloat {
+    @IBInspectable open var progress:CGFloat {
         get {
             return progressLayer.progress
         }
@@ -45,20 +45,20 @@ open class IPaRoundProgressView: UIView {
             self.layer.setNeedsDisplay()
         }
     }
-  
-    @IBInspectable public var lineWidth:CGFloat = 5 {
+    
+    @IBInspectable open var lineWidth:CGFloat = 5 {
         didSet {
             progressLayer.lineWidth = lineWidth
         }
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
+        
     }
-
+    
 }

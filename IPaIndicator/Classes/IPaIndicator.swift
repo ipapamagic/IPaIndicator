@@ -8,15 +8,15 @@
 
 import UIKit
 
-@objc public class IPaIndicator: UIView {
+@objc open class IPaIndicator: UIView {
     lazy var indicatorBlackView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+     // Drawing code
+     }
+     */
     
     required override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,7 +32,7 @@ import UIKit
         indicatorBlackView.backgroundColor = UIColor(white: 0, alpha: 0.7)
         indicatorBlackView.layer.cornerRadius = 10
         indicatorBlackView.clipsToBounds = true
-       
+        
         
         indicatorBlackView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(indicatorBlackView)
@@ -59,7 +59,7 @@ import UIKit
         }
         return actualInView
     }
-    public class func show(_ inView:UIView) -> Self {
+    open class func show(_ inView:UIView) -> Self {
         let actualInView = getActualInView(inView)
         let indicator = self.init(frame:actualInView.bounds)
         DispatchQueue.main.async(execute: {
@@ -76,7 +76,7 @@ import UIKit
         })
         return indicator
     }
-    public class func hide(_ fromView:UIView) {
+    open class func hide(_ fromView:UIView) {
         let actualFromView = getActualInView(fromView)
         DispatchQueue.main.async(execute: {
             let views = actualFromView.subviews.filter({

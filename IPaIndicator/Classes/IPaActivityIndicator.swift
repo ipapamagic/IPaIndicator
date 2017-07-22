@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class IPaActivityIndicator: IPaIndicator {
+open class IPaActivityIndicator: IPaIndicator {
     
     lazy var indicator = UIActivityIndicatorView(activityIndicatorStyle:.whiteLarge)
     
@@ -20,7 +20,7 @@ public class IPaActivityIndicator: IPaIndicator {
         label.numberOfLines = 0
         return label
     }()
-   
+    
     override func initialSetting() {
         super.initialSetting()
         indicator.translatesAutoresizingMaskIntoConstraints = false
@@ -52,14 +52,14 @@ public class IPaActivityIndicator: IPaIndicator {
         self.addConstraint(constraint)
         constraint = NSLayoutConstraint(item: self, attribute: .trailing, relatedBy: .greaterThanOrEqual, toItem: indicatorBlackView, attribute: .trailing, multiplier: 1, constant: 16)
         self.addConstraint(constraint)
-
+        
         
     }
     
     
-// MARK:static public function
+    // MARK:static public function
     
-    static public func show(_ inView:UIView,text:String?) {
+    static open func show(_ inView:UIView,text:String?) {
         let indicator = self.show(inView)
         if let text = text {
             indicator.textLabel.text = text
