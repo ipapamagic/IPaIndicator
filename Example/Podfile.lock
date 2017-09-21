@@ -1,19 +1,16 @@
 PODS:
-  - DRCircularProgress (1.0.3)
-  - IPaIndicator (2.0)
+  - IPaIndicator (3.0)
 
 DEPENDENCIES:
-  - DRCircularProgress
   - IPaIndicator (from `../`)
 
 EXTERNAL SOURCES:
   IPaIndicator:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  DRCircularProgress: d4e19f1d1bfb47e7c6337585748d26624ef7c7d1
-  IPaIndicator: bce42269ace7a517d4937bbb48090a3a4bfbdd92
+  IPaIndicator: dc59fdd63aa1c037044994053b4af4d3824cba32
 
-PODFILE CHECKSUM: 48d1195def3d893613433dd6653806cd224c1047
+PODFILE CHECKSUM: 62564e40c0172138cf8e40a0a21480449544375d
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1

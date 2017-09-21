@@ -38,7 +38,7 @@ open class IPaActivityIndicator: IPaIndicator {
         indicatorBlackView.addConstraint(constraint)
         constraint = NSLayoutConstraint(item: indicatorBlackView, attribute: .trailing, relatedBy: .greaterThanOrEqual, toItem: textLabel, attribute: .trailing, multiplier: 1, constant: 8)
         indicatorBlackView.addConstraint(constraint)
-        textLabel.setContentCompressionResistancePriority(751, for: .horizontal)
+        textLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 751), for: .horizontal)
         indicator.startAnimating()
         
         

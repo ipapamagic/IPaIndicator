@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc open class IPaIndicator: UIView {
+open class IPaIndicator: UIView {
     lazy var indicatorBlackView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     /*
      // Only override draw() if you perform custom drawing.
