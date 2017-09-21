@@ -59,7 +59,7 @@ open class IPaActivityIndicator: IPaIndicator {
     
     // MARK:static public function
     
-    static open func show(_ inView:UIView,text:String?) {
+    open class func show(_ inView:UIView,text:String?) {
         let indicator = self.show(inView)
         if let text = text {
             indicator.textLabel.text = text
