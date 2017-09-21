@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class IPaIndicator: UIView {
+@objc open class IPaIndicator: UIView {
     lazy var indicatorBlackView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     /*
      // Only override draw() if you perform custom drawing.
@@ -59,7 +59,7 @@ open class IPaIndicator: UIView {
         }
         return actualInView
     }
-    open class func show(_ inView:UIView) -> Self {
+    @objc open class func show(_ inView:UIView) -> Self {
         let actualInView = getActualInView(inView)
         let indicator = self.init(frame:actualInView.bounds)
         DispatchQueue.main.async(execute: {
@@ -76,7 +76,7 @@ open class IPaIndicator: UIView {
         })
         return indicator
     }
-    open class func hide(_ fromView:UIView) {
+    @objc open class func hide(_ fromView:UIView) {
         let actualFromView = getActualInView(fromView)
         DispatchQueue.main.async(execute: {
             let views = actualFromView.subviews.filter({
