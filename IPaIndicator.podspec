@@ -43,4 +43,5 @@ TODO: Add long description of the pod here.
         "SWIFT_VERSION" => "4.0",
         "SWIFT_SWIFT3_OBJC_INFERENCE" => "off"
     }
+    s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 end

@@ -59,35 +59,50 @@ import UIKit
         }
         return actualInView
     }
+    fileprivate class func doShow(_ indicator:IPaIndicator, inView:UIView) {
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        inView.addSubview(indicator)
+        
+        
+        let viewsDict:[String:UIView] = ["view": indicator]
+        inView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",options:[.alignAllTop,.alignAllBottom],metrics:nil,views:viewsDict))
+        inView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",options:[.alignAllLeading,.alignAllTrailing],metrics:nil,views:viewsDict))
+        
+        
+    }
+    fileprivate class func doHide(_ fromView:UIView) {
+        let actualFromView = getActualInView(fromView)
+        let views = actualFromView.subviews.filter({
+            view in
+            return view is IPaIndicator
+        })
+        for view in views {
+            view.removeFromSuperview()
+        }
+    }
     @objc open class func show(_ inView:UIView) -> Self {
         let actualInView = getActualInView(inView)
         let indicator = self.init(frame:actualInView.bounds)
-        DispatchQueue.main.async(execute: {
-            
-            indicator.translatesAutoresizingMaskIntoConstraints = false
-            actualInView.addSubview(indicator)
-            
-            
-            let viewsDict:[String:UIView] = ["view": indicator]
-            actualInView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",options:[.alignAllTop,.alignAllBottom],metrics:nil,views:viewsDict))
-            actualInView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",options:[.alignAllLeading,.alignAllTrailing],metrics:nil,views:viewsDict))
-            
-            
-        })
+        if Thread.isMainThread {
+            doShow(indicator, inView: actualInView)
+        }
+        else {
+            DispatchQueue.main.async(execute: {
+                
+                doShow(indicator, inView: actualInView)
+            })
+        }
         return indicator
     }
     @objc open class func hide(_ fromView:UIView) {
-        let actualFromView = getActualInView(fromView)
-        DispatchQueue.main.async(execute: {
-            let views = actualFromView.subviews.filter({
-                view in
-                return view is IPaIndicator
+        if Thread.isMainThread {
+            doHide(fromView)
+        }
+        else {
+            DispatchQueue.main.async(execute: {
+                doHide(fromView)
+                
             })
-            for view in views {
-                view.removeFromSuperview()
-            }
-            
-        })
-        
+        }
     }
 }
