@@ -11,7 +11,7 @@ import UIKit
 
 open class IPaActivityIndicator: IPaIndicator {
     
-    lazy var indicator = UIActivityIndicatorView(activityIndicatorStyle:.whiteLarge)
+    lazy var indicator = UIActivityIndicatorView(style:.whiteLarge)
     
     lazy var textLabel:UILabel = {
         let label = UILabel()
