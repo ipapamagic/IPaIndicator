@@ -10,6 +10,7 @@ import UIKit
 
 @objc open class IPaIndicator: UIView {
     lazy var indicatorBlackView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    var counter = 1
     /*
      // Only override draw() if you perform custom drawing.
      // An empty implementation adversely affects performance during animation.
@@ -59,6 +60,12 @@ import UIKit
         }
         return actualInView
     }
+    fileprivate class func getCurrentIndicator<T>(with view:UIView,type:T.Type) -> T? {
+        let indicator = view.subviews.first { (subView) -> Bool in
+            return Bool(subView is T)
+        } as? T
+        return indicator
+    }
     fileprivate class func doShow(_ indicator:IPaIndicator, inView:UIView) {
         indicator.translatesAutoresizingMaskIntoConstraints = false
         inView.addSubview(indicator)
@@ -72,16 +79,21 @@ import UIKit
     }
     fileprivate class func doHide(_ fromView:UIView) {
         let actualFromView = getActualInView(fromView)
-        let views = actualFromView.subviews.filter({
-            view in
-            return view is IPaIndicator
-        })
-        for view in views {
-            view.removeFromSuperview()
+        guard let indicator = getCurrentIndicator(with: actualFromView,type:self) else {
+            return
+        }
+        indicator.counter -= 1
+        if indicator.counter <= 0 {
+            indicator.removeFromSuperview()
         }
     }
     @objc open class func show(_ inView:UIView) -> Self {
         let actualInView = getActualInView(inView)
+        if let indiator = getCurrentIndicator(with: actualInView,type:self) {
+            indiator.counter += 1
+            return indiator
+        }
+        
         let indicator = self.init(frame:actualInView.bounds)
         doShow(indicator, inView: actualInView)
         return indicator
