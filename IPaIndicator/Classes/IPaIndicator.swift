@@ -95,26 +95,28 @@ import UIKit
         }
         
         let indicator = self.init(frame:actualInView.bounds)
-        if Thread.isMainThread {
-            doShow(indicator, inView: actualInView)
-        }
-        else {
-            DispatchQueue.main.async(execute: {
-                
-                doShow(indicator, inView: actualInView)
-            })
-        }
+//        if Thread.isMainThread {
+//            doShow(indicator, inView: actualInView)
+//        }
+//        else {
+//            DispatchQueue.main.async(execute: {
+//
+//                doShow(indicator, inView: actualInView)
+//            })
+//        }
+        doShow(indicator, inView: actualInView)
         return indicator
     }
     @objc open class func hide(_ fromView:UIView) {
-        if Thread.isMainThread {
-            doHide(fromView)
-        }
-        else {
-            DispatchQueue.main.async(execute: {
-                doHide(fromView)
-                
-            })
-        }
+//        if Thread.isMainThread {
+//            doHide(fromView)
+//        }
+//        else {
+//            DispatchQueue.main.async(execute: {
+//                doHide(fromView)
+//                
+//            })
+//        }
+        doHide(fromView)
     }
 }
