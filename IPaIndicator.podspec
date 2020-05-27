@@ -28,9 +28,9 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/ipapamagic/IPaIndicator.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
 
-  s.source_files = 'IPaIndicator/Classes/**/*'
+#  s.source_files = 'IPaIndicator/Classes/**/*'
   
   # s.resource_bundles = {
   #   'IPaIndicator' => ['IPaIndicator/Assets/*.png']
@@ -39,5 +39,12 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-   
+  s.subspec 'Indicator' do |sp|
+      sp.source_files = 'IPaIndicator/Classes/**/*'
+      
+  end
+  s.subspec 'IPaProgressObservable' do |sp|
+      sp.dependency 'IPaDownloadManager', '~> 1.3'
+      sp.source_files = 'IPaProgressObservable/Classes/**/*'
+  end
 end

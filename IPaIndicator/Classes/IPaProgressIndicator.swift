@@ -12,7 +12,24 @@ open class IPaProgressIndicator: IPaIndicator {
     open lazy var progressView:IPaRoundProgressView = {
         let pView = IPaRoundProgressView(frame: .zero)
         pView.progress = 0
+        pView.translatesAutoresizingMaskIntoConstraints = false
+        pView.backgroundColor = .clear
         return pView
+    }()
+    open var infoLabel:UILabel = {
+        let label = UILabel(frame: .zero)
+        label.textColor = .white
+        label.backgroundColor = .clear
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    open var contentStackView:UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     open var progress:CGFloat {
         set {
@@ -21,6 +38,49 @@ open class IPaProgressIndicator: IPaIndicator {
         get {
             return progressView.progress
         }
+    }
+    
+    private var completionObserver:NSKeyValueObservation?
+    private var progressObserver: NSKeyValueObservation?
+    open class func show(_ inView:UIView,target:IPaProgressObservable) {
+        let indicator = self.show(inView)
+        indicator.observeProgress(target,handler:{
+            (_,_) in
+        })
+        
+    }
+    deinit {
+        if let progressObserver = progressObserver {
+            progressObserver.invalidate()
+            self.progressObserver = nil
+        }
+        if let completionObserver = completionObserver {
+            completionObserver.invalidate()
+            self.completionObserver = nil
+        }
+    }
+    open func observeProgress(_ target:IPaProgressObservable ,handler:@escaping (IPaProgressObservable,CGFloat)->()) {
+        if let progressObserver = progressObserver {
+            progressObserver.invalidate()
+            self.progressObserver = nil
+        }
+        if let completionObserver = completionObserver {
+            completionObserver.invalidate()
+            self.completionObserver = nil
+        }
+        progressObserver = target.observeProgress({ (target,progress) in
+            DispatchQueue.main.async {
+                self.progress = progress
+                handler(target,progress)
+            }
+            
+        })
+        completionObserver = target.observeComplete({ (target) in
+            DispatchQueue.main.async {
+                IPaProgressIndicator.hideIndicator(self)
+            }
+        })
+        
     }
     
     /*
@@ -32,14 +92,29 @@ open class IPaProgressIndicator: IPaIndicator {
      */
     override func initialSetting() {
         super.initialSetting()
-        progressView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.backgroundColor = UIColor.clear
-        indicatorBlackView.addSubview(progressView)
-        let viewDict = ["progressView":progressView] as [String : Any]
-        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[progressView(100)]-30-|", options: [], metrics: nil, views:viewDict)
+        
+        
+        indicatorBlackView.addSubview(contentStackView)
+        let viewDict = ["stackView":contentStackView] as [String : Any]
+        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[stackView]-30-|", options: [], metrics: nil, views:viewDict)
         indicatorBlackView.addConstraints(constraints)
-        constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-30-[progressView(100)]-30-|", options: [], metrics: nil, views: viewDict)
+        constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-30-[stackView]-30-|", options: [], metrics: nil, views: viewDict)
         indicatorBlackView.addConstraints(constraints)
+        
+        
+        let view = UIView(frame: .zero)
+        view.addSubview(progressView)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        progressView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        progressView.heightAnchor.constraint(equalTo: progressView.widthAnchor, multiplier: 1).isActive = true
+        view.topAnchor.constraint(equalTo: progressView.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: progressView.bottomAnchor).isActive = true
+        view.centerXAnchor.constraint(equalTo: progressView.centerXAnchor).isActive = true
+        view.widthAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+        contentStackView.addArrangedSubview(view)
+        contentStackView.addArrangedSubview(infoLabel)
+        
+        
         
     }
 }

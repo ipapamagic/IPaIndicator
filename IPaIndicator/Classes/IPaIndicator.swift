@@ -10,6 +10,11 @@ import UIKit
 
 @objc open class IPaIndicator: UIView {
     lazy var indicatorBlackView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    public var backgroundView:UIView {
+        get {
+            return indicatorBlackView
+        }
+    }
     var counter = 1
     /*
      // Only override draw() if you perform custom drawing.
@@ -18,7 +23,31 @@ import UIKit
      // Drawing code
      }
      */
-    
+    var widthConstraint:NSLayoutConstraint?
+    open var preferIndicatorWidth:CGFloat? {
+        get {
+            if let widthConstraint = widthConstraint {
+                return widthConstraint.constant
+            }
+            return nil
+        }
+        set {
+            guard let newValue = newValue else {
+                if let widthConstraint = widthConstraint {
+                    indicatorBlackView.removeConstraint(widthConstraint)
+                }
+                return
+            }
+            if let widthConstraint = widthConstraint {
+                widthConstraint.constant = newValue
+                self.setNeedsDisplay()
+            }
+            else {
+                widthConstraint = indicatorBlackView.widthAnchor.constraint(equalToConstant: newValue)
+                widthConstraint?.isActive = true
+            }
+        }
+    }
     required override public init(frame: CGRect) {
         super.init(frame: frame)
         initialSetting()
@@ -72,20 +101,23 @@ import UIKit
         
         
         let viewsDict:[String:UIView] = ["view": indicator]
-        inView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",options:[.alignAllTop,.alignAllBottom],metrics:nil,views:viewsDict))
-        inView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",options:[.alignAllLeading,.alignAllTrailing],metrics:nil,views:viewsDict))
+        inView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|",options:[],metrics:nil,views:viewsDict))
+        inView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|",options:[],metrics:nil,views:viewsDict))
         
         
+    }
+    class func hideIndicator(_ indicator:IPaIndicator) {
+        indicator.counter -= 1
+        if indicator.counter <= 0 {
+            indicator.removeFromSuperview()
+        }
     }
     fileprivate class func doHide(_ fromView:UIView) {
         let actualFromView = getActualInView(fromView)
         guard let indicator = getCurrentIndicator(with: actualFromView,type:self) else {
             return
         }
-        indicator.counter -= 1
-        if indicator.counter <= 0 {
-            indicator.removeFromSuperview()
-        }
+        self.hideIndicator(indicator)
     }
     @objc open class func show(_ inView:UIView) -> Self {
         let actualInView = getActualInView(inView)
