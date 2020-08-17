@@ -9,7 +9,7 @@
 
 import UIKit
 import QuartzCore
-@IBDesignable
+
 open class IPaRoundProgressView: UIView {
     override open class var layerClass: AnyClass {
         get {
