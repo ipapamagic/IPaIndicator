@@ -55,15 +55,15 @@ open class IPaActivityIndicator: IPaIndicator {
         
         
     }
-    
-    
+     
     // MARK:static public function
     
-    @objc open class func show(_ inView:UIView,text:String?) {
+    @objc open class func show(_ inView:UIView,text:String?) -> Self {
         let indicator = self.show(inView)
         if let text = text {
             indicator.textLabel.text = text
         }
+        return indicator
     }
     
 }
