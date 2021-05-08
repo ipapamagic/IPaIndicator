@@ -119,6 +119,7 @@ import UIKit
         }
         self.hideIndicator(indicator)
     }
+    @discardableResult
     @objc open class func show(_ inView:UIView) -> Self {
         let actualInView = getActualInView(inView)
         if let indiator = getCurrentIndicator(with: actualInView,type:self) {
