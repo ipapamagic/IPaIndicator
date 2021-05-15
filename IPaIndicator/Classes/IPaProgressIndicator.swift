@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 open class IPaProgressIndicator: IPaIndicator {
     open lazy var progressView:IPaRoundProgressView = {
@@ -31,58 +32,33 @@ open class IPaProgressIndicator: IPaIndicator {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    open var progress:CGFloat {
+    open var progress:Double {
         set {
-            progressView.progress = newValue
+            progressView.progress = CGFloat(newValue)
         }
         get {
-            return progressView.progress
+            return Double(progressView.progress)
         }
     }
     
-    private var completionObserver:NSKeyValueObservation?
-    private var progressObserver: NSKeyValueObservation?
-    open class func show(_ inView:UIView,target:IPaProgressObservable) {
+    var progressCancellable:AnyCancellable?
+    open class func show(_ inView:UIView,target:IPaProgressObservable) -> IPaProgressIndicator {
         let indicator = self.show(inView)
-        indicator.observeProgress(target,handler:{
-            (_,_) in
-        })
-        
+        indicator.observer(target)
+        return indicator
     }
     deinit {
-        if let progressObserver = progressObserver {
-            progressObserver.invalidate()
-            self.progressObserver = nil
-        }
-        if let completionObserver = completionObserver {
-            completionObserver.invalidate()
-            self.completionObserver = nil
-        }
+      
     }
-    open func observeProgress(_ target:IPaProgressObservable ,handler:@escaping (IPaProgressObservable,CGFloat)->()) {
-        if let progressObserver = progressObserver {
-            progressObserver.invalidate()
-            self.progressObserver = nil
-        }
-        if let completionObserver = completionObserver {
-            completionObserver.invalidate()
-            self.completionObserver = nil
-        }
-        progressObserver = target.observeProgress({ (target,progress) in
+    func observer(_ target:IPaProgressObservable) {
+        self.progressCancellable = target.progressPublisher().sink(receiveValue: { progress in
             DispatchQueue.main.async {
                 self.progress = progress
-                handler(target,progress)
-            }
-            
-        })
-        completionObserver = target.observeComplete({ (target) in
-            DispatchQueue.main.async {
-                IPaProgressIndicator.hideIndicator(self)
             }
         })
+//        .assign(to: \.progress, on: self)
         
     }
-    
     /*
      // Only override draw() if you perform custom drawing.
      // An empty implementation adversely affects performance during animation.

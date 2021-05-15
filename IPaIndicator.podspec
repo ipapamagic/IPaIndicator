@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IPaIndicator'
-  s.version          = '3.3'
+  s.version          = '3.4'
   s.summary          = 'A short description of IPaIndicator.'
   s.swift_version    = '5.0'
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/ipapamagic/IPaIndicator.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '13.0'
 
 #  s.source_files = 'IPaIndicator/Classes/**/*'
   
@@ -41,5 +41,5 @@ TODO: Add long description of the pod here.
   # s.dependency 'AFNetworking', '~> 2.3'
   s.source_files = 'IPaIndicator/Classes/**/*'
   s.dependency 'IPaDownloadManager', '~> 1.3'
-  
+  s.dependency 'IPaURLResourceUI', '~> 5.1'
 end

@@ -6,11 +6,13 @@
 //
 
 import UIKit
-
+import Combine
+import IPaDownloadManager
+import IPaURLResourceUI
 public protocol IPaProgressObservable: NSObject {
-    var isProgressing:Bool { get }
-    func observeProgress(_ handler:@escaping (IPaProgressObservable,CGFloat)->())-> NSKeyValueObservation
-    func observeComplete(_ handler:@escaping (IPaProgressObservable)->())->NSKeyValueObservation
+    func progressPublisher() -> AnyPublisher<Double,Never>
+    
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -19,4 +21,19 @@ public protocol IPaProgressObservable: NSObject {
     }
     */
 
+}
+
+extension IPaURLRequestTaskOperation:IPaProgressObservable {
+    
+    public func progressPublisher() -> AnyPublisher<Double,Never> {
+        return self.publisher(for: \.progress).eraseToAnyPublisher()
+    }
+    
+}
+extension IPaDownloadOperation:IPaProgressObservable {
+    
+    public func progressPublisher() -> AnyPublisher<Double,Never> {
+        return self.publisher(for: \.progress).eraseToAnyPublisher()
+    }
+    
 }
