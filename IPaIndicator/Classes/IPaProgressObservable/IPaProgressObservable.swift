@@ -9,6 +9,7 @@ import UIKit
 import Combine
 import IPaDownloadManager
 import IPaURLResourceUI
+@available(iOS 13.0, *)
 public protocol IPaProgressObservable: NSObject {
     func progressPublisher() -> AnyPublisher<Double,Never>
     
@@ -22,7 +23,7 @@ public protocol IPaProgressObservable: NSObject {
     */
 
 }
-
+@available(iOS 13.0, *)
 extension IPaURLRequestTaskOperation:IPaProgressObservable {
     
     public func progressPublisher() -> AnyPublisher<Double,Never> {
@@ -30,6 +31,7 @@ extension IPaURLRequestTaskOperation:IPaProgressObservable {
     }
     
 }
+@available(iOS 13.0, *)
 extension IPaDownloadOperation:IPaProgressObservable {
     
     public func progressPublisher() -> AnyPublisher<Double,Never> {

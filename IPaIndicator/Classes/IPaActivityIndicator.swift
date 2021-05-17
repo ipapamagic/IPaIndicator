@@ -11,7 +11,7 @@ import UIKit
 
 open class IPaActivityIndicator: IPaIndicator {
     
-    lazy var indicator = UIActivityIndicatorView(style:.whiteLarge)
+    lazy var indicator = UIActivityIndicatorView(style:.large)
     
     lazy var textLabel:UILabel = {
         let label = UILabel()
@@ -23,6 +23,7 @@ open class IPaActivityIndicator: IPaIndicator {
     
     override func initialSetting() {
         super.initialSetting()
+        indicator.color = .white
         indicator.translatesAutoresizingMaskIntoConstraints = false
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         indicatorBlackView.addSubview(indicator)

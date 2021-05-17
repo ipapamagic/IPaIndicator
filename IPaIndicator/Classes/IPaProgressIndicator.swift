@@ -8,7 +8,7 @@
 
 import UIKit
 import Combine
-
+@available(iOS 13.0, *)
 open class IPaProgressIndicator: IPaIndicator {
     open lazy var progressView:IPaRoundProgressView = {
         let pView = IPaRoundProgressView(frame: .zero)
