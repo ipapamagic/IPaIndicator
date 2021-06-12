@@ -11,8 +11,18 @@ import UIKit
 
 open class IPaActivityIndicator: IPaIndicator {
     
-    lazy var indicator = UIActivityIndicatorView(style:.large)
-    
+    lazy var indicator:UIActivityIndicatorView = {
+        
+        if #available(iOS 13.0, *) {
+            return UIActivityIndicatorView(style:.large)
+        } else {
+            // Fallback on earlier versions
+            return UIActivityIndicatorView(style:.whiteLarge)
+        }
+        
+        
+        
+    }()
     lazy var textLabel:UILabel = {
         let label = UILabel()
         label.textColor = .white
