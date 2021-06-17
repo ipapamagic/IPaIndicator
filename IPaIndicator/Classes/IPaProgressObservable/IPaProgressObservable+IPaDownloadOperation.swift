@@ -15,7 +15,7 @@ extension IPaDownloadOperation: IPaProgressObservable {
     public func observeProgress(_ handler: @escaping (IPaProgressObservable,CGFloat) -> ()) -> NSKeyValueObservation {
         return self.observe(\.progress) {
             (operation,_) in
-            handler(operation,operation.progress)
+            handler(operation,CGFloat(operation.progress))
         }
     }
     
