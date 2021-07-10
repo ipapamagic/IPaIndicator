@@ -41,24 +41,11 @@ open class IPaProgressIndicator: IPaIndicator {
         }
     }
     
-    var progressCancellable:AnyCancellable?
-    open class func show(_ inView:UIView,target:IPaProgressObservable) -> IPaProgressIndicator {
-        let indicator = self.show(inView)
-        indicator.observer(target)
-        return indicator
-    }
+    
     deinit {
       
     }
-    func observer(_ target:IPaProgressObservable) {
-        self.progressCancellable = target.progressPublisher().sink(receiveValue: { progress in
-            DispatchQueue.main.async {
-                self.progress = progress
-            }
-        })
-//        .assign(to: \.progress, on: self)
-        
-    }
+    
     /*
      // Only override draw() if you perform custom drawing.
      // An empty implementation adversely affects performance during animation.

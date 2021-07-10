@@ -9,6 +9,37 @@ import UIKit
 import Combine
 import IPaDownloadManager
 import IPaURLResourceUI
+fileprivate var AssociatedObjectHandle: UInt8 = 0
+@available(iOS 13.0, *)
+extension IPaProgressIndicator {
+    var progressCancellable:AnyCancellable?
+    {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedObjectHandle) as? AnyCancellable
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedObjectHandle, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    
+    open class func show(_ inView:UIView,target:IPaProgressObservable) -> IPaProgressIndicator {
+        let indicator = self.show(inView)
+        indicator.observer(target)
+        return indicator
+    }
+    
+    func observer(_ target:IPaProgressObservable) {
+        self.progressCancellable = target.progressPublisher().sink(receiveValue: { progress in
+            DispatchQueue.main.async {
+                self.progress = progress
+            }
+        })
+//        .assign(to: \.progress, on: self)
+        
+    }
+}
+
 @available(iOS 13.0, *)
 public protocol IPaProgressObservable: NSObject {
     func progressPublisher() -> AnyPublisher<Double,Never>
