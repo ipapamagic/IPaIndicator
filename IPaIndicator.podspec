@@ -39,7 +39,16 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.source_files = 'IPaIndicator/Classes/**/*'
-  s.dependency 'IPaDownloadManager', '~> 1.3'
-  s.dependency 'IPaURLResourceUI', '~> 5.1'
+  #s.source_files = 'IPaIndicator/Classes/**/*'
+  
+  s.subspec 'Indicators' do |sp|
+    sp.source_files = 'IPaIndicator/Classes/Indicators/**/*'
+    
+  end
+  s.subspec 'ValueObservers' do |sp|
+    sp.source_files = 'IPaIndicator/Classes/ValueObservers/**/*'
+    sp.dependency 'IPaDownloadManager', '~> 1.3'
+    sp.dependency 'IPaURLResourceUI', '~> 5.1'
+  end
+  
 end

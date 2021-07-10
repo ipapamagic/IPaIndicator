@@ -1,5 +1,5 @@
 PODS:
-  - IPaIndicator (3.2)
+  - IPaIndicator (3.4)
 
 DEPENDENCIES:
   - IPaIndicator (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  IPaIndicator: 689f269b9be9d6f4b5482a0d719fd3ae44fcef5f
+  IPaIndicator: 21547a4f590dc4713deff60c430766b3a3fae9e5
 
 PODFILE CHECKSUM: 874f5bd75a9a32d6186cb027f6fe445871343b7e
 
-COCOAPODS: 1.7.0.beta.2
+COCOAPODS: 1.10.1
