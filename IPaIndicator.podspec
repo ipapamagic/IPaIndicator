@@ -45,8 +45,8 @@ TODO: Add long description of the pod here.
     sp.source_files = 'IPaIndicator/Classes/Indicators/**/*'
     
   end
-  s.subspec 'ValueObservers' do |sp|
-    sp.source_files = 'IPaIndicator/Classes/ValueObservers/**/*'
+  s.subspec 'ProgressIndicator' do |sp|
+    sp.source_files = 'IPaIndicator/Classes/ProgressIndicator/**/*'
     sp.dependency 'IPaDownloadManager', '~> 1.3'
     sp.dependency 'IPaURLResourceUI', '~> 5.1'
   end

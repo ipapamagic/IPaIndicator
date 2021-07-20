@@ -10,6 +10,26 @@ import UIKit
 import Combine
 @available(iOS 13.0, *)
 open class IPaProgressIndicator: IPaIndicator {
+    var progressCancellable:AnyCancellable?
+    open class func show(_ inView:UIView,target:IPaProgressObservable) -> IPaProgressIndicator {
+        let indicator = self.show(inView)
+        indicator.observer(target)
+        return indicator
+    }
+    open override func removeFromSuperview() {
+        super.removeFromSuperview()
+        self.progressCancellable?.cancel()
+        self.progressCancellable = nil
+    }
+    func observer(_ target:IPaProgressObservable) {
+        self.progressCancellable = target.progressPublisher().sink(receiveValue: { progress in
+            DispatchQueue.main.async {
+                self.progress = progress
+            }
+        })
+//        .assign(to: \.progress, on: self)
+    }
+    
     open lazy var progressView:IPaRoundProgressView = {
         let pView = IPaRoundProgressView(frame: .zero)
         pView.progress = 0
