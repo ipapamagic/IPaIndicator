@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.name             = 'IPaIndicator'
   s.version          = '3.4'
   s.summary          = 'A short description of IPaIndicator.'
-  s.swift_version    = '5.0'
+  s.swift_version    = '5.3'
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
 #   * Try to keep it short, snappy and to the point.
