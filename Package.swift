@@ -5,14 +5,19 @@ import PackageDescription
 
 let package = Package(
     name: "IPaIndicator",
-    platforms: [.iOS(.v12)],
+    platforms: [.iOS(.v13)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "IPaIndicator",
             targets: ["IPaIndicator"]),
+    
+        .library(
+            name: "IPaToast",
+            targets: ["IPaToast"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/ipapamagic/IPaUIKitHelper.git", from: "1.3.0"),
         .package(url: "https://github.com/ipapamagic/IPaDownloadManager.git", from: "1.4.0"),
         .package(url: "https://github.com/ipapamagic/IPaURLResourceUI.git", from: "5.4.0")
         // Dependencies declare other packages that this package depends on.
@@ -23,9 +28,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "IPaIndicator",
-            dependencies: [.product(name: "IPaDownloadManager", package: "IPaDownloadManager"),
+            dependencies: ["IPaIndicator",.product(name: "IPaDownloadManager", package: "IPaDownloadManager"),
                            .product(name: "IPaURLResourceUI", package: "IPaURLResourceUI")],
             path:"Sources/IPaIndicator"),
+        .target(
+            name: "IPaToast",
+            dependencies: [.product(name: "IPaUIKitHelper", package: "IPaUIKitHelper")],
+            path:"Sources/IPaToast"),
         .testTarget(
             name: "IPaIndicatorTests",
             dependencies: ["IPaIndicator"]),
