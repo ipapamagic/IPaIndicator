@@ -1,8 +1,13 @@
 use_frameworks!
 
+platform :ios, '10.0'
+
 target 'IPaIndicator_Example' do
   pod 'IPaIndicator', :path => '../'
-  
-#    pod 'FBSnapshotTestCase'
 
+  target 'IPaIndicator_Tests' do
+    inherit! :search_paths
+
+    
+  end
 end

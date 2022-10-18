@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  IPaIndicator
 //
-//  Created by ipapamagic@gmail.com on 06/25/2017.
-//  Copyright (c) 2017 ipapamagic@gmail.com. All rights reserved.
+//  Created by ipapamagic on 10/18/2022.
+//  Copyright (c) 2022 ipapamagic. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
     }

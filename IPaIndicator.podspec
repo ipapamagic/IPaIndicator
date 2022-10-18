@@ -3,14 +3,14 @@
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
+# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
 #
 
 Pod::Spec.new do |s|
   s.name             = 'IPaIndicator'
-  s.version          = '3.4'
+  s.version          = '4.0.0'
   s.summary          = 'A short description of IPaIndicator.'
-  s.swift_version    = '5.3'
+
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
 #   * Try to keep it short, snappy and to the point.
@@ -24,13 +24,13 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/ipapamagic/IPaIndicator'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'ipapamagic@gmail.com' => 'ipapamagic@gmail.com' }
+  s.author           = { 'ipapamagic' => 'ipapamagic@gmail.com' }
   s.source           = { :git => 'https://github.com/ipapamagic/IPaIndicator.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '12.0'
 
-#  s.source_files = 'IPaIndicator/Classes/**/*'
+  s.source_files = 'Sources/IPaIndicator/Classes/**/*'
   
   # s.resource_bundles = {
   #   'IPaIndicator' => ['IPaIndicator/Assets/*.png']
@@ -39,16 +39,6 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-  #s.source_files = 'IPaIndicator/Classes/**/*'
-  
-  s.subspec 'Indicators' do |sp|
-    sp.source_files = 'IPaIndicator/Classes/Indicators/**/*'
-    
-  end
-  s.subspec 'ProgressIndicator' do |sp|
-    sp.source_files = 'IPaIndicator/Classes/ProgressIndicator/**/*'
-    sp.dependency 'IPaDownloadManager', '~> 1.3'
-    sp.dependency 'IPaURLResourceUI', '~> 5.1'
-  end
-  
+    s.dependency 'IPaDownloadManager', '~> 1.4.0'
+    s.dependency 'IPaURLResourceUI', '~>5.4.0'
 end
