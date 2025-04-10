@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IPaIndicator'
-  s.version          = '4.0.0'
+  s.version          = '4.0.1'
   s.summary          = 'A short description of IPaIndicator.'
 
 # This description is used to generate tags and improve search results.
@@ -43,10 +43,10 @@ TODO: Add long description of the pod here.
     s.subspec 'IPaIndicator' do | sp |
             sp.source_files = 'Sources/IPaIndicator/**/*'
             sp.dependency 'IPaDownloadManager', '~> 1.4.0'
-            sp.dependency 'IPaURLResourceUI', '~>5.4.0'
+            sp.dependency 'IPaURLResourceUI', '~> 6.0.0'
     end
     s.subspec 'IPaToast' do | sp |
             sp.source_files = 'Sources/IPaToast/**/*'
-            sp.dependency 'IPaUIKitHelper', '~> 1.3.0'
+            sp.dependency 'IPaUIKitHelper', '~> 1.3.1'
     end
 end
