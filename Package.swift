@@ -28,7 +28,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "IPaIndicator",
-            dependencies: ["IPaIndicator",.product(name: "IPaDownloadManager", package: "IPaDownloadManager"),
+            dependencies: [.product(name: "IPaDownloadManager", package: "IPaDownloadManager"),
                            .product(name: "IPaURLResourceUI", package: "IPaURLResourceUI")],
             path:"Sources/IPaIndicator"),
         .target(
