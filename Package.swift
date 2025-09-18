@@ -17,9 +17,9 @@ let package = Package(
             targets: ["IPaToast"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/ipapamagic/IPaUIKitHelper.git", from: "1.3.0"),
+        .package(url: "https://github.com/ipapamagic/IPaUIKitHelper.git", from: "1.3.1"),
         .package(url: "https://github.com/ipapamagic/IPaDownloadManager.git", from: "1.4.0"),
-        .package(url: "https://github.com/ipapamagic/IPaURLResourceUI.git", from: "5.4.0")
+        .package(url: "https://github.com/ipapamagic/IPaURLResourceUI.git", from: "6.0.0")
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
